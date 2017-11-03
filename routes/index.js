@@ -9,7 +9,7 @@ var ReactDOMServer = require('react-dom/server');
 var uglifycss = require('uglifycss');
 var path = require('path');
 var uglified = uglifycss.processFiles(
-    [ 'public/stylesheets/style.css' ],
+    [ ],
     { maxLineLen: 500, expandVars: true }
 );
 
