@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href="/stylesheets/bootstrap.min.css"/>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p>My <%= message %></p> 
+	<div class="container-fluid no-padding">
+		<div class="wrapper-outer">
+			<div class="wrapper-inner">
+				<div class="col-md-9 col-sm-8 col-xs-12 no-padding">
+					<div class="left-outer-schedules">
+						<div class="schedules-tab schedules-tab-edit ">
+							<h1 class="all schedules-title active-schedule-title"> Live &amp; Upcoming </h1>
+							<h2 class="recent schedules-title"> Completed </h2>
+							<p class="date schedules-title" style="display:none !important;"> Date </p>
+							<div class="dropdown schedule-dropdown inline-block ">
+								<div>
+									<span style="position: relative;">
+										<input class="date-picker-field schedule-filter" onchange="inputChange();" type="text" size="12" id="filterDate" placeholder="Select date" globalnumber="537">
+											<div class="JsDatePickBox" style="z-index: 3; position: absolute; top: 18px; left: 0px; display: none;">
+												<div class="boxLeftWall">
+													<div class="leftTopCorner">
+													</div>
+													<div class="leftWall"></div>
+													<div class="leftBottomCorner"></div>
+												</div>
+												<div class="boxMain">
+													<div class="boxMainInner">
+														<div class="controlsBar" globalnumber="537">
+															<div class="monthForwardButton" globalnumber="537"></div>
+															<div class="monthBackwardButton" globalnumber="537"></div>
+															<div class="yearForwardButton" globalnumber="537"></div>
+															<div class="yearBackwardButton" globalnumber="537"></div>
+														</div>
+														<div class="clearfix"></div>
+														<div class="tooltip"></div>
+														<div class="weekDaysRow">
+															<div class="weekDay">Mon</div>
+															<div class="weekDay">Tue</div>
+															<div class="weekDay">Wed</div>
+															<div class="weekDay">Thu</div>
+															<div class="weekDay">Fri</div>
+															<div class="weekDay">Sat</div>
+															<div class="weekDay" style="margin-right: 0px;">Sun</div>
+														</div>
+														<div class="boxMainCellsContainer"></div>
+														<div class="clearfix"></div>
+													</div>
+												</div>
+												<div class="boxRightWall">
+													<div class="rightTopCorner">
+													</div>
+													<div class="rightWall"></div>
+													<div class="rightBottomCorner"></div>
+												</div>
+												<div class="clearfix"></div>
+												<div class="jsDatePickCloseButton" globalnumber="537"></div>
+												<div class="topWall"></div>
+												<div class="bottomWall"></div>
+											</div>
+									</span>
+									<i class="fa fa-calendar calendar-icon" onclick="$('#filterDate').click();"></i>
+								</div>
+							</div>
+						</div>
+						<div id="schedule-content">
+							<div>
+								<% for(var i=0; i < upcomingMatches.length; i++) {%>
+								<div style="height: 60px; display: flex; align-items: center;"><%= upcomingMatches[i].date %></div>
+ 								<% for(var j=0; j < upcomingMatches[i].matches.length; j++) {%>
+									<table>
+										<tbody>
+											<tr class="schedule-match-row">                   
+												<td>
+													<a><%= upcomingMatches[i].matches[j].mh %>
+														<br><b><%= upcomingMatches[i].matches[j].ml %></b>
+													</a>
+												</td>
+												<td><h4><a style="display: flex; align-items: center; justify-content: center;">
+													<div class="schedule-team-details inline-block" style="display: flex; align-items: center;">
+														<div class="inline-block schedule-team-stats">
+															<p class="no-margin-bottom" style="margin: 0;"><%= upcomingMatches[i].matches[j].t1n %></p>
+														</div>
+													</div>
+													<span>vs</span>
+													<div class="schedule-team-details inline-block" style="display: flex; align-items: center;">
+														<div class="inline-block schedule-team-stats">
+															<p class="no-margin-bottom" style="margin: 0;"><%= upcomingMatches[i].matches[j].t2n %></p>
+														</div>
+													</div>
+												</a></h4></td>
+												<td>
+													<a>
+														<p class="msc-center-text" id="match-timer-right-widget-3230"></p>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								<% } %> 
+								<% } %>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					
+					<%- helloComponentMarkup %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  </body>
+</html>
