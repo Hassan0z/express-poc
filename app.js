@@ -10,6 +10,21 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var	app = express();
+var compression = require('compression');
+var minifyHTML = require('express-minify-html');
+
+app.use(minifyHTML({
+    override:      true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments:            true,
+        collapseWhitespace:        true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes:     true,
+        removeEmptyAttributes:     true,
+        minifyJS:                  true
+    }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,6 +58,7 @@ var cache = (duration) => {
 
 app.use('/', cache(180000), index);
 app.use('/users', cache(180000), users);
+app.use(compression());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
