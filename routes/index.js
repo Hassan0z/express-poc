@@ -6,6 +6,12 @@ var React = require("react"),
     myComponent =require("../HelloComponent"),
     ReactComponent = React.createFactory(myComponent);
 var ReactDOMServer = require('react-dom/server');
+var uglifycss = require('uglifycss');
+var path = require('path');
+var uglified = uglifycss.processFiles(
+    [ 'public/stylesheets/style.css', 'public/stylesheets/bootstrap.min.css' ],
+    { maxLineLen: 500, expandVars: true }
+);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -30,7 +36,8 @@ router.get('/', function(req, res, next) {
             resultObj.matches = _.filter(matches, {md: match.md});
             return resultObj;
         });
-        res.render('index', { title: 'Express', upcomingMatches: upcomingMatches, message: ':)', helloComponentMarkup: staticMarkup });
+        res.render('index', { title: 'Express', upcomingMatches: upcomingMatches, message: ':)', 
+        	helloComponentMarkup: staticMarkup, uglified: uglified });
 	});
 });
 
