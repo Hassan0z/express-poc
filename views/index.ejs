@@ -25,7 +25,9 @@
   						</div>
   						<div class="news-inner-details-thumb-wrapper">
   							<div class="wrapper">
-  								<div class="sixteen-by-seven" style="background: rgba(0, 0, 0, 0) url('https://www.cricingif.com/Images/ArticleImages/1.6/7214.jpg') no-repeat scroll 0 0 / contain "></div>
+								<div class="sixteen-by-seven" 
+								  style="background: rgba(0, 0, 0, 0) url('https://www.cricingif.com/Images/ArticleImages/1.6/7214.jpg') no-repeat scroll 0 0 / contain ">
+								</div>
   							</div>
   						</div>
   						<div class="nid-content-wrapper">
@@ -41,7 +43,45 @@
   							</div>
   							<div class="nid-text-container">
   								<div id="cms-content">
-  									<%= articleContent %>
+									<% for (i = 0 ; i < tagsStartIndices.length ; i++) { %>
+										<% var startIndex = tagsStartIndices[i]; %>
+										<% var token = srcString.substring(startIndex, tagsEndIndices[i] + 2); %>
+										<% var type = token.split(' ')[0].replace('{{', ''); %>
+										<% if(type === 'h1') { %>
+											<% var args = token.substring(5, token.length - 2) %>
+											<div class="article-content-h1"><p><%= args %></p></div>
+										<% } else if (type === 'title') {%>
+											<% var args = token.substring(7, token.length - 2) %>
+											<div class="tc-quiz-ques" style="margin-top:20px;" >
+												<p><%= args %></p>
+											</div>
+										<% } else if (type === 'text') {%>
+											<% var args = token.substring(6, token.length - 2) %>
+											<!-- <% var links = args.split('{{links') %>
+											<% if (links.length > 0) { %>
+												<% for (i = 0; i < links.length; i++) { %>
+													<% var aTagEndIndex = args.indexOf("}}", links[i]) + 2; %>
+													<% var aToken = args.substring(links[i], aTagEndIndex); %>
+													<% var token = aToken.substring(6, aToken.length - 2) %>
+													<% var _args = token.split('++'); %>
+													<a href="<%= _args[0] %>">
+														<%= _args[1] %>
+													</a>
+												<% } %>
+											<% } %> -->
+											<p><%= args %></p>
+										<% } else if (type === 'h2') {%>
+											<% var args = token.substring(5, token.length - 2) %>
+											<div class="article-content-h2" ><p><%= args %></p></div>
+										<% } else if (type === 'detail') {%>
+											<% var args = token.substring(8, token.length - 2); %>
+											<h5><%= args %></h5>
+										<% } else if (type === 'feature-image') {%>
+											<% token = token.substring(15, token.length - 2); %>
+											<% var args = token.trim(); %>
+											<img src="<%= args %>" class="article-img"/>
+										<% } %>
+									<% } %>
   								</div>
   							</div>
   						</div>

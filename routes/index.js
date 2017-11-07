@@ -12,7 +12,7 @@ var uglified = uglifycss.processFiles(
     [ ],
     { maxLineLen: 500, expandVars: true }
 );
-// var articleTextHelper = require('..	/helpers/article-text-helper');
+var articleTextHelper = require('../helpers/article-text-helper');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,9 +25,17 @@ router.get('/', function(req, res, next) {
 	  }
 	}, function(error, response, body) {
 		var _articleResponse = response.body;
-		var reactComponentMarkup = ReactComponent(),
-        staticMarkup = ReactDOMServer.renderToStaticMarkup(reactComponentMarkup);
-		res.render('index', { title: _articleResponse.t, seriesName: _articleResponse.ta, articleContent: staticMarkup  });
+		var _srcString = _articleResponse.d.replace(/\n/g, ' ');
+		console.log(_srcString);
+		// var reactComponentMarkup = ReactComponent(),
+  //       staticMarkup = ReactDOMServer.renderToStaticMarkup(reactComponentMarkup);
+		res.render('index', { 
+			title: _articleResponse.t, 
+			seriesName: _articleResponse.ta, 
+			srcString:  _srcString,
+			tagsStartIndices: articleTextHelper.getIndicesOf("{{", _srcString),
+			tagsEndIndices: articleTextHelper.getIndicesOf("}}", _srcString)
+		});
 	});
 
 	// request.post({
