@@ -36,7 +36,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
+
+app.use('/img',express.static(path.join(__dirname, 'public/images')));
+app.use('/js',express.static(path.join(__dirname, 'public/javascripts')));
+app.use('/css',express.static(path.join(__dirname, 'public/stylesheets')));
 
 var cache = (duration) => {
   return (req, res, next) => {
@@ -56,7 +60,8 @@ var cache = (duration) => {
   }
 }
 
-app.use('/', cache(180000), index);
+app.use('/', index);
+// app.use('/', cache(180000), index);
 app.use('/users', cache(180000), users);
 app.use(compression());
 

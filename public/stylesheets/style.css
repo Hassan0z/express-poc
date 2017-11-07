@@ -1371,10 +1371,33 @@ input[type=radio]:focus {
     color: #666
 }
 
+.upper-title h2 {
+    color: #a2c21b;
+    text-transform: uppercase;
+    font-size: .9em;
+    font-family: "poppins-semibold";
+    display: inline-block;
+    margin: 0 0 10px;
+    line-height: 18px;
+}
+
 .main-question p {
     font-size: 2.2em;
     color: #404040;
     font-family: "poppins-semibold"
+}
+
+.main-question h1 {
+    font-size: 2.2em;
+    color: #404040;
+    font-family: "poppins-semibold";
+    margin: 0 0 10px;
+    line-height: 1.42857143;
+}
+
+.main-question h1 a {
+    text-decoration: none;
+    color: #666;
 }
 
 .nid-content-wrapper {
