@@ -4,5 +4,10 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('match-schedule'));
-registerServiceWorker();
+document.onreadystatechange = () => {
+    if (document.readyState === 'complete') {
+        debugger;
+        ReactDOM.render(<App />, document.getElementById('match-schedule'));
+        // registerServiceWorker();
+    }
+};
