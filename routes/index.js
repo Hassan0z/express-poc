@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 		res.render('index', { 
 			title: _articleResponse.t, 
 			seriesName: _articleResponse.ta, 
-			srcString:  _srcString,
+			srcString: _srcString,
 			tagsStartIndices: articleTextHelper.getIndicesOf("{{", _srcString),
 			tagsEndIndices: articleTextHelper.getIndicesOf("}}", _srcString)
 		});

@@ -16,9 +16,11 @@
 	function getNormalizedString(srcString) {
 		var prvString = srcString.replace(/\n/g, ' ');
 		var aTagIndices = getIndicesOf("{{link ", srcString);
+		
 		if (aTagIndices.length > 0) {
 			for (i = 0; i < aTagIndices.length; i++) {
 				var aTagEndIndex = srcString.indexOf("}}", aTagIndices[i]) + 2;
+				console.log(aTagEndIndex);
 				var aToken = srcString.substring(aTagIndices[i], aTagEndIndex);
 				var token = aToken.substring(6, aToken.length - 2);
 				var args = token.split('++');
